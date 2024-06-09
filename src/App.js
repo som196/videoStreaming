@@ -27,26 +27,15 @@ const App = () => {
       <ThemeContext.Provider
         value={{isDarkTheme, changeTheme, activeTab, changeTab}}
       >
-        <Route exact path="/login" component={LoginForm} />
-        <ProtectedRoute exact path="/" component={Home} />
-        <ProtectedRoute exact path="/videos/:id" component={VideoItemDetails} />
-        <ProtectedRoute exact path="/saved-videos" component={SavedVideos} />
-        <ProtectedRoute exact path="/gaming" component={GamingVideos} />
-        <ProtectedRoute exact path="/trending" component={TrendingVideos} />
+        <Route exact path='/login' component={LoginForm} />
+        <ProtectedRoute exact path='/' component={Home} />
+        <ProtectedRoute exact path='/videos/:id' component={VideoItemDetails} />
+        <ProtectedRoute exact path='/saved-videos' component={SavedVideos} />
+        <ProtectedRoute exact path='/gaming' component={GamingVideos} />
+        <ProtectedRoute exact path='/trending' component={TrendingVideos} />
       </ThemeContext.Provider>
     </Switch>
   )
 }
 
 export default App
-
-// <ProtectedRoute exact path="/products" component={Products} />
-//       <ProtectedRoute exact path="/cart" component={Cart} />
-//       <Route path="/not-found" component={NotFound} />
-//       <Redirect to="not-found" />
-
-//  savedVideos: [],
-//   activeTab: 'Home',
-//   changeTab: () => {},
-//   changeTheme: () => {},
-//   addVideo: () => {},

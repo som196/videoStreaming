@@ -78,7 +78,7 @@ const LoginForm = props => {
         return (
           <BackgroundContainer isDarkTheme={isDarkTheme}>
             <LoginContainer isDarkTheme={isDarkTheme}>
-              <CompanyLogo src={logoCompany} alt="company logo" />
+              <CompanyLogo src={logoCompany} alt="website logo" />
               <FormContainer onSubmit={loginFormSubmitted}>
                 <LabelandInputContainer>
                   <LabelItem isDarkTheme={isDarkTheme} htmlFor="username">

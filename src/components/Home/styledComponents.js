@@ -2,6 +2,7 @@ import styled from 'styled-components'
 
 export const HomeContainer0 = styled.div`
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
+  width: 100%;
 `
 
 export const HomeContainer = styled.div`
@@ -14,26 +15,20 @@ export const HomeContainer = styled.div`
   }
 `
 
-export const HomeVideosContainer = styled.div`
+export const HomeVideosContainer = styled.ul`
   display: flex;
   flex-direction: row;
   background-color: #ebebeb;
   flex-wrap: wrap;
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#ffffff')};
+  list-style-type: none;
 
   @media (max-width: 576px) {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    list-style-type: none;
   }
-`
-
-export const LeftContainer = styled.div`
-  width: 20%;
-`
-
-export const RightContainer = styled.div`
-  width: 80%;
 `
 
 export const BannerContainer = styled.div`
@@ -100,11 +95,12 @@ export const InputSearch = styled.input`
   }
 `
 
-export const SearchIcon = styled.div`
+export const SearchIcon = styled.button`
   background-color: ${props => (props.isDarkTheme ? '#7e858e' : '#ebebeb')};
   text-align: center;
   width: 2rem;
   padding: 0.1rem;
+  border: none;
 `
 
 export const LoaderContainer = styled.div`
@@ -143,3 +139,12 @@ export const FailedButton = styled.button`
   width: 4rem;
   color: white;
 `
+export const NoResultsImage = styled(FailedImage)``
+
+export const NoResultsContainer = styled(FailedContainer)``
+
+export const NoResultsHeading = styled(FailedHeading)``
+
+export const NoResultsPara = styled(FailedPara)``
+
+export const NoResultsButton = styled(FailedButton)``

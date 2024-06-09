@@ -2,8 +2,6 @@ import {useState, useEffect} from 'react'
 import Cookies from 'js-cookie'
 import {formatDistanceToNow} from 'date-fns'
 import Loader from 'react-loader-spinner'
-import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
-import {MdPlaylistAdd} from 'react-icons/md'
 import ReactPlayer from 'react-player'
 import ThemeContext from '../../context/ThemeContext'
 
@@ -35,6 +33,9 @@ import {
   FailedHeading,
   FailedPara,
   FailedButton,
+  LikeIcon,
+  DislikeIcon,
+  SaveIcon,
 } from './styledComponents'
 
 import Header from '../Header'
@@ -48,18 +49,31 @@ const apiStatusConstants = {
 }
 
 const VideoItemDetails = props => {
+  let a = null
   const {match} = props
   const {params} = match
   const {id} = params
-  const [apiStatus, setApiStatus] = useState('')
+  const [apiStatus, setApiStatus] = useState(apiStatusConstants.initial)
   const [videoData, setVideoData] = useState([])
   const [isLikeClick, setIsLikeClick] = useState(false)
   const [isDislikeClick, setIsDisLikelick] = useState(false)
   const [isSaveClick, setIsSaveClick] = useState(false)
 
-  const likeIconClick = () => setIsLikeClick(!isLikeClick)
-  const dislikeIconClick = () => setIsDisLikelick(!isDislikeClick)
-  const saveIconClick = () => setIsSaveClick(!isSaveClick)
+  // const saveVideo = isSaveClick ? addVideo : removeVideo
+
+  const likeIconClick = () => {
+    setIsLikeClick(!isLikeClick)
+    setIsDisLikelick(false)
+  }
+
+  const dislikeIconClick = () => {
+    setIsDisLikelick(!isDislikeClick)
+    setIsLikeClick(false)
+  }
+
+  const saveIconClick = () => {
+    setIsSaveClick(!isSaveClick)
+  }
 
   const getHomeVideoDetailsSuccess = fetchedData => {
     const videoDetails = fetchedData.video_details
@@ -90,32 +104,42 @@ const VideoItemDetails = props => {
       method: 'GET',
     }
 
-    const response = await fetch(homeApiUrl, options)
-    if (response.ok) {
-      const fetchedData = await response.json()
-      setApiStatus(apiStatusConstants.success)
-      getHomeVideoDetailsSuccess(fetchedData)
-    } else {
+    try {
+      const response = await fetch(homeApiUrl, options)
+      if (response.ok) {
+        const fetchedData = await response.json()
+        setApiStatus(apiStatusConstants.success)
+        getHomeVideoDetailsSuccess(fetchedData)
+      } else {
+        // Handle non-200 status codes here
+        setApiStatus(apiStatusConstants.failure)
+        console.log('Error fetching video details:', response.statusText)
+      }
+    } catch (error) {
+      // Handle network errors and other exceptions here
       setApiStatus(apiStatusConstants.failure)
-      // Handle network or other errors here (e.g., display error message)
+      console.log('Error fetching video details:', error)
     }
   }
 
+  const retryButton = () => fetchVideoData()
+
   const videosSuccess = () => {
-    console.log('a')
-    // console.log(formatDistanceToNow(new Date(videoData.publishedAt)))
-    // import {formatDistanceToNow} from 'date-fns'
-    // console.log(formatDistanceToNow(new Date(2021, 8, 20)))
-    // Return the distance between the given date and now in words.
+    if (videoData.publishedAt !== undefined) {
+      a = formatDistanceToNow(new Date(videoData.publishedAt))
+      a = a.split(' ')
+    }
+    // console.log(newStr)
+
     return (
       <ThemeContext.Consumer>
         {value => {
-          const {isDarkTheme} = value
-          const likeColor =
-            isLikeClick && !isDislikeClick ? '#3b82f6' : '#181818'
+          const {isDarkTheme, addVideo} = value
+          const color = isDarkTheme ? '#64748b' : '#0f0f0f'
+          const likeColor = isLikeClick && !isDislikeClick ? '#2563eb' : color
           const dislikeColor =
-            !isLikeClick && isDislikeClick ? '#3b82f6' : '#181818'
-          const saveColor = isSaveClick ? '#3b82f6' : '#181818'
+            !isLikeClick && isDislikeClick ? '#2563eb' : '#64748b'
+          const saveColor = isSaveClick ? '#2563eb' : '#64748b'
           const saveContent = isSaveClick ? 'Saved' : 'Save'
 
           return (
@@ -126,47 +150,51 @@ const VideoItemDetails = props => {
               <Header />
               <Navigation />
               <VideoPlayerContainer isDarkTheme={isDarkTheme}>
-                <ReactPlayer url={videoData.videoUrl} />
+                <ReactPlayer
+                  url={videoData.videoUrl}
+                  controls
+                  width="100%"
+                  height="400px"
+                />
+
                 <VideoTitle>{videoData.title}</VideoTitle>
                 <ViewsLikesContainer>
                   <ViewsPublishedContainer>
                     <ViewsPara isDarkTheme={isDarkTheme}>
                       {videoData.viewCount} views
                     </ViewsPara>
-                    <PublishedAt isDarkTheme={isDarkTheme}>
-                      {videoData.publishedAt}
-                    </PublishedAt>
+                    <PublishedAt isDarkTheme={isDarkTheme}>{a}</PublishedAt>
                   </ViewsPublishedContainer>
                   <LikesDisContainer>
                     <LikeButtonContainer>
                       <Button onClick={likeIconClick}>
-                        <AiOutlineLike size="30" color={likeColor} />
+                        <LikeIcon color={likeColor} />
+                        <LikeDisPara
+                          isDarkTheme={isDarkTheme}
+                          color={likeColor}
+                        >
+                          Like
+                        </LikeDisPara>
                       </Button>
-                      <LikeDisPara
-                        isDarkTheme={isDarkTheme}
-                        color={dislikeColor}
-                      >
-                        Like
-                      </LikeDisPara>
                     </LikeButtonContainer>
                     <DisLikeButtonContainer>
                       <Button onClick={dislikeIconClick}>
-                        <AiOutlineDislike size="30" color={dislikeColor} />
+                        <DislikeIcon color={dislikeColor} />
+                        <LikeDisPara
+                          isDarkTheme={isDarkTheme}
+                          color={dislikeColor}
+                        >
+                          Dislike
+                        </LikeDisPara>
                       </Button>
-                      <LikeDisPara
-                        isDarkTheme={isDarkTheme}
-                        color={dislikeColor}
-                      >
-                        Dislike
-                      </LikeDisPara>
                     </DisLikeButtonContainer>
                     <SavedVideosButtonContainer>
                       <Button onClick={saveIconClick}>
-                        <MdPlaylistAdd size="30" color={saveColor} />
+                        <SaveIcon color={saveColor} />
+                        <SavePara isDarkTheme={isDarkTheme} color={saveColor}>
+                          {saveContent}
+                        </SavePara>
                       </Button>
-                      <SavePara isDarkTheme={isDarkTheme} color={saveColor}>
-                        {saveContent}
-                      </SavePara>
                     </SavedVideosButtonContainer>
                   </LikesDisContainer>
                 </ViewsLikesContainer>
@@ -175,7 +203,7 @@ const VideoItemDetails = props => {
                 <ChannelDetailsContainer>
                   <ChannelImage
                     src={videoData.channelProfileImg}
-                    alt="channel img"
+                    alt="channel logo"
                   />
                   <ChannelNameandDescription>
                     <ChannelNamePara isDarkTheme={isDarkTheme}>
@@ -215,10 +243,12 @@ const VideoItemDetails = props => {
                 Oops! Something Went Wrong
               </FailedHeading>
               <FailedPara isDarkTheme={isDarkTheme}>
-                We are having trouble to complete your request <br /> Please try
-                again.
+                We are having some trouble to complete your request. <br />
+                Please try again.
               </FailedPara>
-              <FailedButton isDarkTheme={isDarkTheme}>Retry</FailedButton>
+              <FailedButton onClick={retryButton} isDarkTheme={isDarkTheme}>
+                Retry
+              </FailedButton>
             </FailedContainer>
           </HomeContainer0>
         )

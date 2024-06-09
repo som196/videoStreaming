@@ -14,7 +14,7 @@ import {
 } from './styledComponents'
 import ThemeContext from '../../context/ThemeContext'
 
-const HomeVideoCard = props => {
+const TrendingVideoCard = props => {
   const {eachVideo} = props
   const {
     channelName,
@@ -52,4 +52,4 @@ const HomeVideoCard = props => {
     </ThemeContext.Consumer>
   )
 }
-export default HomeVideoCard
+export default TrendingVideoCard

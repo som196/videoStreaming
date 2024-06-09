@@ -36,9 +36,9 @@ const Header = props => {
           : 'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
         const color = isDarkTheme ? '#ffffff' : '#0f0f0f'
         const MoonorBright = isDarkTheme ? (
-          <StyledBrightness onClick={changeTheme} />
+          <StyledBrightness onClick={changeTheme} data-testid="theme" />
         ) : (
-          <StyledMoon onClick={changeTheme} />
+          <StyledMoon onClick={changeTheme} data-testid="theme" />
         )
         return (
           <HeaderContainer isDarkTheme={isDarkTheme}>

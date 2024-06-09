@@ -25,6 +25,11 @@ import {
   FailedHeading,
   FailedPara,
   FailedButton,
+  NoResultsContainer,
+  NoResultsHeading,
+  NoResultsImage,
+  NoResultsPara,
+  NoResultsButton,
 } from './styledComponents'
 import Header from '../Header'
 import Navigation from '../Navigation'
@@ -38,17 +43,12 @@ const apiStatusConstants = {
 }
 
 const Home = () => {
-  //   const jwtToken1 = Cookies.get('jwt_token')
-
-  //   return <>{jwtToken1 ? <AuthenticatedHome /> : <Redirect to="/login" />}</>
-  // }
-
-  // const AuthenticatedHome = () => {
   const [apiStatus, setApiStatus] = useState('')
   const [videoData, setVideoData] = useState([])
   const [searchInput, setSearchInput] = useState('')
   const [isBannerClosed, setIsBannerClose] = useState(false)
   const [updatedVideoData, setUpdatedVideoData] = useState(videoData)
+  const [videoDataLength, setVideoDataLength] = useState(null)
 
   const companyLogoUrl =
     'https://assets.ccbp.in/frontend/react-js/nxt-watch-logo-light-theme-img.png'
@@ -62,6 +62,7 @@ const Home = () => {
       video => video.title.toLowerCase().includes(searchInput.toLowerCase()), // Case-insensitive search
     )
     setVideoData(filteredData)
+    setVideoDataLength(filteredData.length)
   }
 
   const closeBanner = () => {
@@ -78,8 +79,8 @@ const Home = () => {
       viewCount: eachVideoDetails.view_count,
       publishedAt: eachVideoDetails.published_at,
     }))
-    console.log(updatedData)
     setVideoData(updatedData)
+    setVideoDataLength(updatedData.length)
     setUpdatedVideoData(updatedData)
   }
 
@@ -112,7 +113,7 @@ const Home = () => {
   }
 
   const bannerImg = () => (
-    <BannerContainer isBannerClosed={isBannerClosed}>
+    <BannerContainer isBannerClosed={isBannerClosed} data-testid="banner">
       <BannerContainerInside>
         <CompanyLogoInBanner src={companyLogoUrl} alt="nxt watch logo" />
         <CloseButton onClick={closeBanner} data-testid="close">
@@ -122,6 +123,53 @@ const Home = () => {
       <BannerPara>Buy Nxt Watch Premium prepaid plans with UPI</BannerPara>
       <BannerButton>GET IT NOW</BannerButton>
     </BannerContainer>
+  )
+
+  const retryButtonClicked = () => getHomeVideos()
+
+  const homeVideoCards = () => (
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDarkTheme} = value
+
+        return (
+          <HomeVideosContainer isDarkTheme={isDarkTheme}>
+            {videoData.map(eachVideo => (
+              <HomeVideoCard eachVideo={eachVideo} key={eachVideo.id} />
+            ))}
+          </HomeVideosContainer>
+        )
+      }}
+    </ThemeContext.Consumer>
+  )
+
+  const noResult = () => (
+    <ThemeContext.Consumer>
+      {value => {
+        const {isDarkTheme} = value
+
+        return (
+          <NoResultsContainer>
+            <NoResultsImage
+              src="https://assets.ccbp.in/frontend/react-js/nxt-watch-no-search-results-img.png"
+              alt="no videos"
+            />
+            <NoResultsHeading isDarkTheme={isDarkTheme}>
+              No Search results found
+            </NoResultsHeading>
+            <NoResultsPara isDarkTheme={isDarkTheme}>
+              Try different key words or remove search filter
+            </NoResultsPara>
+            <NoResultsButton
+              isDarkTheme={isDarkTheme}
+              onClick={retryButtonClicked}
+            >
+              Retry
+            </NoResultsButton>
+          </NoResultsContainer>
+        )
+      }}
+    </ThemeContext.Consumer>
   )
 
   const themeContextHome = () => (
@@ -137,22 +185,21 @@ const Home = () => {
               {bannerImg()}
               <SearchContainer isDarkTheme={isDarkTheme}>
                 <InputSearch
-                  type="text"
+                  type="search"
                   value={searchInput}
                   onChange={onChangeSearchInput}
                   placeholder="Search"
                   isDarkTheme={isDarkTheme}
                   id="search"
                 />
-                <SearchIcon isDarkTheme={isDarkTheme}>
+                <SearchIcon
+                  isDarkTheme={isDarkTheme}
+                  data-testid="searchButton"
+                >
                   <IoMdSearch size="27" onClick={searchIconClicked} />
                 </SearchIcon>
               </SearchContainer>
-              <HomeVideosContainer isDarkTheme={isDarkTheme}>
-                {videoData.map(eachVideo => (
-                  <HomeVideoCard eachVideo={eachVideo} key={eachVideo.id} />
-                ))}
-              </HomeVideosContainer>
+              {videoDataLength !== 0 ? homeVideoCards() : noResult()}
             </HomeContainer>
           </HomeContainer0>
         )

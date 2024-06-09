@@ -2,14 +2,15 @@ import styled from 'styled-components'
 import {BsMoon, BsBrightnessHigh} from 'react-icons/bs'
 import {GiHamburgerMenu} from 'react-icons/gi'
 
-export const HeaderContainer = styled.div`
+export const HeaderContainer = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  padding: 1rem;
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#ffffff')};
   position: sticky;
   top: 0;
+  width: 100%;
+  list-style-type: none;
 `
 
 export const CompanyLogoHeader = styled.img`
@@ -92,6 +93,10 @@ export const StyledBrightness = styled(BsBrightnessHigh)`
     width: 40px;
     margin-right: 0.5rem;
   }
+`
+export const IconButon = styled.button`
+  background-color: transparent;
+  border: none;
 `
 
 export const LogoutConfirmationContainer = styled.div`

@@ -9,7 +9,7 @@ export const NavigationLgContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: space-between;
-  width: 17%;
+  width: 250px;
   height: 92%;
   position: fixed;
   top: 60px;

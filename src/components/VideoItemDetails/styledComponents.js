@@ -1,52 +1,88 @@
 import styled from 'styled-components'
+import {AiOutlineLike, AiOutlineDislike} from 'react-icons/ai'
+import {MdPlaylistAdd} from 'react-icons/md'
 
 export const HomeContainer0 = styled.div`
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
   background-size: cover;
-  height: 100vh;
   padding: 10px;
 `
 
 export const VideoPlayerContainer = styled.div`
   background-color: ${props => (props.isDarkTheme ? '#0f0f0f' : '#f9f9f9')};
-  margin-left: 260px;
-  margin-top: 20px;
-  margin-bottom: 0px;
+  margin-left: 20px;
+  margin-right: 20px;
 
-  @media (max-width: 768px) {
-    margin: 0px;
-    width: 100%;
+  @media (min-width: 769px) {
+    margin-left: 280px;
+    margin-top: 20px;
+    margin-bottom: 0px;
   }
 `
 
+// export const VideoReactPlayer = styled.div`
+//   position: relative;
+// `
+
 export const VideoTitle = styled.p`
   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+  font-size: 0.7rem;
+
+  @media (min-width: 769px) {
+    font-size: 1.3rem;
+  }
 `
 
 export const ViewsLikesContainer = styled.div`
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  margin: 2rem;
+  margin-left: 0.5rem;
+
+  @media (min-width: 576px and max-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+    margin-left: 0.2rem;
+  }
 `
 
 export const ViewsPublishedContainer = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    margin-right: 10%;
+    width: 27%;
+  }
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
-  width: 27%;
+  margin-left: 0.2rem;
+  width: 29%;
 `
 
 export const ViewsPara = styled.p`
-  color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
-  font-size: 1rem;
+  @media (min-width: 768px) {
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    font-size: 1rem;
+  }
+
+  font-size: 0.7rem;
+  margin-right: 10px;
 `
 
 export const PublishedAt = styled.p`
-  color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
-  font-size: 1rem;
+  @media (min-width: 768px) {
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    font-size: 1rem;
+  }
+
+  font-size: 0.7rem;
 `
 
 export const LikesDisContainer = styled.div`
@@ -55,32 +91,82 @@ export const LikesDisContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+
+  @media (min-width: 576px and max-width: 768px) {
+    width: 48%;
+  }
 `
 
 export const LikeButtonContainer = styled.div`
+  @media (min-width: 768px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    margin-left: 30px;
+    cursor: pointer;
+  }
+
   display: flex;
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: 30px;
-  cursor: pointer;
+  margin-left: 10px;
 `
+
 export const Button = styled.button`
   background-color: transparent;
   border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-item: center;
 `
 
 export const DisLikeButtonContainer = styled(LikeButtonContainer)``
 
 export const LikeDisPara = styled.p`
-  color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
-  font-size: 1rem;
-  margin-left: 0.5rem;
+  @media (min-width: 768px) {
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    font-size: 1rem;
+    margin-bottom: 0rem;
+    margin-top: 0.5rem;
+    margin-left: 0.3rem;
+  }
+  font-size: 0.7rem;
 `
-export const SavePara = styled.p`
-  color: ${props => props.color};
+export const LikeIcon = styled(AiOutlineLike)`
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
   font-size: 1rem;
-  margin-left: 0.5rem;
+`
+
+export const DislikeIcon = styled(AiOutlineDislike)`
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
+  font-size: 1rem;
+`
+
+export const SaveIcon = styled(MdPlaylistAdd)`
+  @media (min-width: 768px) {
+    font-size: 2rem;
+  }
+  font-size: 1rem;
+`
+
+export const SavePara = styled.p`
+  @media (min-width: 768px) {
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    font-size: 1rem;
+    margin-top: 0.5rem;
+    margin-bottom: 0rem;
+    margin-left: 0.3rem;
+  }
+
+  font-size: 0.7rem;
 `
 
 export const SavedVideosButtonContainer = styled(LikeButtonContainer)``
@@ -92,26 +178,58 @@ export const ChannelDetailsContainer = styled.div`
   flex-direction: row;
 `
 export const ChannelImage = styled.img`
-  height: 5rem;
-  width: 5rem;
-  margin-right: 2rem;
+  height: 2rem;
+  width: 3rem;
+  margin-right: 1rem;
+
+  @media (min-width: 769px) {
+    height: 5rem;
+    width: 5rem;
+    margin-right: 2rem;
+  }
 `
 export const ChannelNameandDescription = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 0px;
 `
 
 export const ChannelNamePara = styled.p`
   font-weight: bold;
   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+  margin: 0px;
+  font-size: 0.7rem;
+
+  @media (min-width: 769px) {
+    font-weight: bold;
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    margin: 0px;
+    font-size: 1.3rem;
+  }
 `
 
 export const ChannelSubscribersPara = styled.p`
   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+  margin: 0px;
+  font-size: 0.7rem;
+
+  @media (min-width: 769px) {
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    margin: 0px;
+    font-size: 1.3rem;
+  }
 `
 
 export const VideoDescriptionPara = styled.p`
   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+  margin-top: 10px;
+  font-size: 0.7rem;
+
+  @media (min-width: 769px) {
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    margin-top: 10px;
+    font-size: 1.3rem;
+  }
 `
 
 export const LoaderContainer = styled.div`
@@ -128,8 +246,15 @@ export const FailedContainer = styled.div`
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  background-color: ${props => (props.isDarkTheme ? '#181818' : '#ffffff')};
-  margin-top: 1rem;
+  background-color: ${props => (props.isDarkTheme ? '#0f0f0f' : '#f9f9f9')};
+  margin-left: 20px;
+  margin-right: 20px;
+
+  @media (min-width: 769px) {
+    margin-left: 280px;
+    margin-top: 20px;
+    margin-bottom: 0px;
+  }
 `
 export const FailedImage = styled.img`
   heigth: 10rem;
