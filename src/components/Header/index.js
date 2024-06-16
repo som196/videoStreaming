@@ -3,6 +3,7 @@ import Cookies from 'js-cookie'
 import Popup from 'reactjs-popup'
 import {FiLogOut} from 'react-icons/fi'
 import {
+  HeaderContainer0,
   HeaderContainer,
   CompanyLogoHeader,
   LogoutButton,
@@ -41,81 +42,83 @@ const Header = props => {
           <StyledMoon onClick={changeTheme} data-testid="theme" />
         )
         return (
-          <HeaderContainer isDarkTheme={isDarkTheme}>
-            <Link to="/">
-              <CompanyLogoHeader src={logoCompany} alt="website logo" />
-            </Link>
-            <ProfileOtherContainer>
-              {MoonorBright}
-              <ProfilePhoto
-                src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
-                alt="profile"
-              />
-              <Hamburger color={color} />
-              <Popup
-                modal
-                trigger={
-                  <LogoutButton
-                    onClick={logoutButtonClicked}
-                    isDarkTheme={isDarkTheme}
-                  >
-                    Logout
-                  </LogoutButton>
-                }
-              >
-                {close => (
-                  <>
-                    <LogoutConfirmationContainer isDarkTheme={isDarkTheme}>
-                      <LogoutConfirmationPara>
-                        Are you sure, you want to logout?
-                      </LogoutConfirmationPara>
-                      <ButtonsContainer>
-                        <LogoutButtonCancelButton onClick={() => close()}>
-                          Cancel
-                        </LogoutButtonCancelButton>
-                        <LogoutButtonConfimationButton
-                          onClick={() => logoutButtonClicked()}
-                        >
-                          Confirm
-                        </LogoutButtonConfimationButton>
-                      </ButtonsContainer>
-                    </LogoutConfirmationContainer>
-                  </>
-                )}
-              </Popup>
-              <Popup
-                modal
-                trigger={
-                  <LogoutIcon
-                    onClick={logoutButtonClicked}
-                    isDarkTheme={isDarkTheme}
-                  >
-                    <FiLogOut size="30" />
-                  </LogoutIcon>
-                }
-              >
-                {close => (
-                  <>
-                    <LogoutConfirmationContainer isDarkTheme={isDarkTheme}>
-                      <LogoutConfirmationPara>
-                        Are you sure, you want to logout?
-                      </LogoutConfirmationPara>
-                      <ButtonsContainer>
-                        <LogoutButtonCancelButton onClick={() => close()}>
-                          Cancel
-                        </LogoutButtonCancelButton>
-                        <LogoutButtonConfimationButton
-                          onClick={() => logoutButtonClicked()}
-                        >
-                          Confirm
-                        </LogoutButtonConfimationButton>
-                      </ButtonsContainer>
-                    </LogoutConfirmationContainer>
-                  </>
-                )}
-              </Popup>
-            </ProfileOtherContainer>
-          </HeaderContainer>
+          <HeaderContainer0 isDarkTheme={isDarkTheme}>
+            <HeaderContainer>
+              <Link to="/">
+                <CompanyLogoHeader src={logoCompany} alt="website logo" />
+              </Link>
+              <ProfileOtherContainer>
+                {MoonorBright}
+                <ProfilePhoto
+                  src="https://assets.ccbp.in/frontend/react-js/nxt-watch-profile-img.png"
+                  alt="profile"
+                />
+                <Hamburger color={color} />
+                <Popup
+                  modal
+                  trigger={
+                    <LogoutButton
+                      onClick={logoutButtonClicked}
+                      isDarkTheme={isDarkTheme}
+                    >
+                      Logout
+                    </LogoutButton>
+                  }
+                >
+                  {close => (
+                    <>
+                      <LogoutConfirmationContainer isDarkTheme={isDarkTheme}>
+                        <LogoutConfirmationPara>
+                          Are you sure, you want to logout?
+                        </LogoutConfirmationPara>
+                        <ButtonsContainer>
+                          <LogoutButtonCancelButton onClick={() => close()}>
+                            Cancel
+                          </LogoutButtonCancelButton>
+                          <LogoutButtonConfimationButton
+                            onClick={() => logoutButtonClicked()}
+                          >
+                            Confirm
+                          </LogoutButtonConfimationButton>
+                        </ButtonsContainer>
+                      </LogoutConfirmationContainer>
+                    </>
+                  )}
+                </Popup>
+                <Popup
+                  modal
+                  trigger={
+                    <LogoutIcon
+                      onClick={logoutButtonClicked}
+                      isDarkTheme={isDarkTheme}
+                    >
+                      <FiLogOut size="30" />
+                    </LogoutIcon>
+                  }
+                >
+                  {close => (
+                    <>
+                      <LogoutConfirmationContainer isDarkTheme={isDarkTheme}>
+                        <LogoutConfirmationPara>
+                          Are you sure, you want to logout?
+                        </LogoutConfirmationPara>
+                        <ButtonsContainer>
+                          <LogoutButtonCancelButton onClick={() => close()}>
+                            Cancel
+                          </LogoutButtonCancelButton>
+                          <LogoutButtonConfimationButton
+                            onClick={() => logoutButtonClicked()}
+                          >
+                            Confirm
+                          </LogoutButtonConfimationButton>
+                        </ButtonsContainer>
+                      </LogoutConfirmationContainer>
+                    </>
+                  )}
+                </Popup>
+              </ProfileOtherContainer>
+            </HeaderContainer>
+          </HeaderContainer0>
         )
       }}
     </ThemeContext.Consumer>

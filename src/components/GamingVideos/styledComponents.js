@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const GameContainer0 = styled.div`
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
   width: 100%;
+  min-height: 100vh;
 `
 
 export const GameContainer = styled.div`

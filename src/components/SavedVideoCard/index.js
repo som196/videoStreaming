@@ -2,6 +2,7 @@ import {BsDot} from 'react-icons/bs'
 import {formatDistanceToNow} from 'date-fns'
 import {
   VideoContainer,
+  VideoLink,
   VideoThumbNail,
   VideoTitleHeading,
   RemainingDetailsContainer,
@@ -11,12 +12,19 @@ import {
   PublishedSincePara,
 } from './styledComponents'
 import ThemeContext from '../../context/ThemeContext'
+import './index.css'
 
 const SavedVideoCard = props => {
   let a = null
   const {eachVideoDetails} = props
-  const {title, thumbnailUrl, channelName, viewCount, publishedAt, id} =
-    eachVideoDetails
+  const {
+    title,
+    thumbnailUrl,
+    channelName,
+    viewCount,
+    publishedAt,
+    id,
+  } = eachVideoDetails
   return (
     <ThemeContext.Consumer>
       {value => {
@@ -24,20 +32,31 @@ const SavedVideoCard = props => {
         if (publishedAt !== undefined) {
           a = formatDistanceToNow(new Date(publishedAt))
           a = a.split(' ')
+          a = a.slice(1).join(' ')
         }
         return (
-          <VideoContainer to={`/videos/${id}`}>
-            <VideoThumbNail src={thumbnailUrl} alt="video thumbnail" />
-            <RemainingDetailsContainer>
-              <VideoTitleHeading>{title}</VideoTitleHeading>
-              <ChannelName>{channelName}</ChannelName>
-              <ViewsDetailsContainer>
-                <ViewsCountPara>{viewCount}</ViewsCountPara>
-                <BsDot size="45" />
-                <PublishedSincePara>{a}</PublishedSincePara>
-              </ViewsDetailsContainer>
-            </RemainingDetailsContainer>
-          </VideoContainer>
+          <VideoLink to={`/videos/${id}`}>
+            <VideoContainer isDarkTheme={isDarkTheme}>
+              <VideoThumbNail src={thumbnailUrl} alt="video thumbnail" />
+              <RemainingDetailsContainer isDarkTheme={isDarkTheme}>
+                <VideoTitleHeading isDarkTheme={isDarkTheme}>
+                  {title}
+                </VideoTitleHeading>
+                <ChannelName isDarkTheme={isDarkTheme}>
+                  {channelName}
+                </ChannelName>
+                <ViewsDetailsContainer>
+                  <ViewsCountPara isDarkTheme={isDarkTheme}>
+                    {viewCount}
+                  </ViewsCountPara>
+                  <BsDot className="dot-icon" />
+                  <PublishedSincePara isDarkTheme={isDarkTheme}>
+                    {`${a} ago`}
+                  </PublishedSincePara>
+                </ViewsDetailsContainer>
+              </RemainingDetailsContainer>
+            </VideoContainer>
+          </VideoLink>
         )
       }}
     </ThemeContext.Consumer>

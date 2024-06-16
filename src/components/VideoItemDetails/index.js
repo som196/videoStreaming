@@ -71,10 +71,6 @@ const VideoItemDetails = props => {
     setIsLikeClick(false)
   }
 
-  const saveIconClick = () => {
-    setIsSaveClick(!isSaveClick)
-  }
-
   const getHomeVideoDetailsSuccess = fetchedData => {
     const videoDetails = fetchedData.video_details
 
@@ -128,8 +124,8 @@ const VideoItemDetails = props => {
     if (videoData.publishedAt !== undefined) {
       a = formatDistanceToNow(new Date(videoData.publishedAt))
       a = a.split(' ')
+      a = a.slice(1).join(' ')
     }
-    // console.log(newStr)
 
     return (
       <ThemeContext.Consumer>
@@ -141,6 +137,11 @@ const VideoItemDetails = props => {
             !isLikeClick && isDislikeClick ? '#2563eb' : '#64748b'
           const saveColor = isSaveClick ? '#2563eb' : '#64748b'
           const saveContent = isSaveClick ? 'Saved' : 'Save'
+
+          const saveIconClick = async () => {
+            await setIsSaveClick(!isSaveClick)
+            addVideo(videoData)
+          }
 
           return (
             <HomeContainer0
@@ -156,14 +157,15 @@ const VideoItemDetails = props => {
                   width="100%"
                   height="400px"
                 />
-
                 <VideoTitle>{videoData.title}</VideoTitle>
                 <ViewsLikesContainer>
                   <ViewsPublishedContainer>
                     <ViewsPara isDarkTheme={isDarkTheme}>
                       {videoData.viewCount} views
                     </ViewsPara>
-                    <PublishedAt isDarkTheme={isDarkTheme}>{a}</PublishedAt>
+                    <PublishedAt
+                      isDarkTheme={isDarkTheme}
+                    >{`${a} ago`}</PublishedAt>
                   </ViewsPublishedContainer>
                   <LikesDisContainer>
                     <LikeButtonContainer>

@@ -2,15 +2,20 @@ import styled from 'styled-components'
 import {BsMoon, BsBrightnessHigh} from 'react-icons/bs'
 import {GiHamburgerMenu} from 'react-icons/gi'
 
+export const HeaderContainer0 = styled.div`
+  background-color: ${props => (props.isDarkTheme ? '#181818' : '#ffffff')};
+  position: sticky;
+  top: 0;
+`
+
 export const HeaderContainer = styled.ul`
   display: flex;
   flex-direction: row;
   justify-content: space-between;
-  background-color: ${props => (props.isDarkTheme ? '#181818' : '#ffffff')};
-  position: sticky;
-  top: 0;
   width: 100%;
   list-style-type: none;
+  padding: 0.6rem;
+  margin: 0rem;
 `
 
 export const CompanyLogoHeader = styled.img`

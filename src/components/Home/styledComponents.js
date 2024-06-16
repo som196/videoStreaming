@@ -3,6 +3,8 @@ import styled from 'styled-components'
 export const HomeContainer0 = styled.div`
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
   width: 100%;
+  padding: 0.2rem;
+  min-height: 100vh;
 `
 
 export const HomeContainer = styled.div`

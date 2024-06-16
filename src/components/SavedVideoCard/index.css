@@ -1,0 +1,11 @@
+.dot-icon {
+  margin-top: 1.2rem;
+  color: #64748b;
+}
+
+@media (max-width: 768px) {
+  .dot-icon {
+    margin-top: 0.4rem;
+    color: #64748b;
+  }
+}

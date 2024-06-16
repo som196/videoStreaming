@@ -3,6 +3,7 @@ import styled from 'styled-components'
 export const TrendingContainer0 = styled.div`
   background-color: ${props => (props.isDarkTheme ? '#0f0f0f' : '#f9f9f9')};
   width: 100%;
+  min-height: 100vh;
 `
 
 export const TrendingContainer = styled.div`

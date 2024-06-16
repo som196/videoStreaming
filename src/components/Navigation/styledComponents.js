@@ -10,9 +10,9 @@ export const NavigationLgContainer = styled.div`
   flex-direction: column;
   justify-content: space-between;
   width: 250px;
-  height: 92%;
   position: fixed;
   top: 60px;
+  height: 100vh;
   background-color: ${props => props.bgColor};
   @media screen and (max-width: 768px) {
     display: none;
@@ -79,8 +79,9 @@ export const NavigationSmallContainer = styled.nav`
   background-color: ${props => props.bgColor};
   position: fixed;
   bottom: 0;
+  padding: 1rem;
   align-items: center;
-  @media screen and (min-width: 768px) {
+  @media screen and (min-width: 769px) {
     display: none;
   }
 `

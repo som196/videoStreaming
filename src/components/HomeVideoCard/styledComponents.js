@@ -16,7 +16,7 @@ export const EachVideoContainer = styled(Link)`
   }
 
   @media (max-width: 576px) {
-    width: 100%;
+    width: 90%;
   }
 `
 

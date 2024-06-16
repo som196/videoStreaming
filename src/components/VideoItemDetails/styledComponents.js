@@ -6,6 +6,7 @@ export const HomeContainer0 = styled.div`
   background-color: ${props => (props.isDarkTheme ? '#181818' : '#f9f9f9')};
   background-size: cover;
   padding: 10px;
+  min-height: 100vh;
 `
 
 export const VideoPlayerContainer = styled.div`
@@ -19,10 +20,6 @@ export const VideoPlayerContainer = styled.div`
     margin-bottom: 0px;
   }
 `
-
-// export const VideoReactPlayer = styled.div`
-//   position: relative;
-// `
 
 export const VideoTitle = styled.p`
   color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
@@ -64,6 +61,15 @@ export const ViewsPublishedContainer = styled.div`
   align-items: center;
   margin-left: 0.2rem;
   width: 29%;
+
+  @media (max-width: 576px) {
+    display: flex;
+    flex-direction: row;
+    justify-content: flex-start;
+    align-items: center;
+    margin-left: 0.1rem;
+    width: 40%;
+  }
 `
 
 export const ViewsPara = styled.p`
@@ -73,7 +79,14 @@ export const ViewsPara = styled.p`
   }
 
   font-size: 0.7rem;
-  margin-right: 10px;
+  margin-right: 1rem;
+  margin-top: 0.6rem;
+
+  @media (max-width: 576px) {
+    font-size: 0.5rem;
+    margin-right: 1rem;
+    margin-top: 0.6rem;
+  }
 `
 
 export const PublishedAt = styled.p`
@@ -83,6 +96,10 @@ export const PublishedAt = styled.p`
   }
 
   font-size: 0.7rem;
+
+  @media (max-width: 576px) {
+    font-size: 0.5rem;
+  }
 `
 
 export const LikesDisContainer = styled.div`
@@ -91,9 +108,15 @@ export const LikesDisContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
+  margin-top: 0.8rem;
 
   @media (min-width: 576px and max-width: 768px) {
+    margin-top: 0.8rem;
     width: 48%;
+  }
+
+  @media (max-width: 576px) {
+    width: 60%;
   }
 `
 
@@ -111,7 +134,11 @@ export const LikeButtonContainer = styled.div`
   flex-direction: row;
   justify-content: center;
   align-items: center;
-  margin-left: 10px;
+  margin-left: 5px;
+
+  @media (max-width: 576px) {
+    width: 70%;
+  }
 `
 
 export const Button = styled.button`
@@ -134,27 +161,44 @@ export const LikeDisPara = styled.p`
     margin-top: 0.5rem;
     margin-left: 0.3rem;
   }
-  font-size: 0.7rem;
+  margin-top: 0rem;
+  color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+
+  @media (max-width: 576px) {
+    font-size: 0.6rem;
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+  }
 `
 export const LikeIcon = styled(AiOutlineLike)`
   @media (min-width: 768px) {
     font-size: 2rem;
+    margin-top: 0rem;
   }
-  font-size: 1rem;
+  font-size: 0.8rem;
+
+  @media (max-width: 576px) {
+    font-size: 0.6rem;
+  }
 `
 
 export const DislikeIcon = styled(AiOutlineDislike)`
   @media (min-width: 768px) {
     font-size: 2rem;
   }
-  font-size: 1rem;
+  font-size: 0.8rem;
+  margin-left: 0.01rem;
+
+  @media (max-width: 576px) {
+    font-size: 0.6rem;
+  }
 `
 
 export const SaveIcon = styled(MdPlaylistAdd)`
   @media (min-width: 768px) {
     font-size: 2rem;
   }
-  font-size: 1rem;
+  font-size: 0.8rem;
+  margin-left: 0.01rem;
 `
 
 export const SavePara = styled.p`
@@ -165,8 +209,15 @@ export const SavePara = styled.p`
     margin-bottom: 0rem;
     margin-left: 0.3rem;
   }
-
+  color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
   font-size: 0.7rem;
+  margin-left: 0.01rem;
+  margin-top: 0rem;
+
+  @media (max-width: 576px) {
+    color: ${props => (props.isDarkTheme ? '#f9f9f9' : '#181818')};
+    font-size: 0.6rem;
+  }
 `
 
 export const SavedVideosButtonContainer = styled(LikeButtonContainer)``
